@@ -11,8 +11,14 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
+// To hold the current score
+let score = 0;
+
+// Active player
+let active = 0;
+
 // getting the player current score el
-const current0El = document.getElementById('current--0');
+const currentEl = document.getElementById(`current--${active}`);
 const current1El = document.getElementById('current--1');
 
 // Start the game with both players score having zero
@@ -28,6 +34,23 @@ btnRoll.addEventListener('click', function() {
     diceEl.src = `dice-${dice}.png`;
     // display dice roll
     diceEl.classList.remove('hidden');
+    if (dice === 1) {
+        // switch the player
+        document.querySelector(`.player--${active}`).classList.remove('player--active');
+        active = active === 0 ? 1 : 0;
+        document.querySelector(`.player--${active}`).classList.toggle('player--active');
+        currentEl.textContent = 0;
+    } else {
+        score += dice;
+        currentEl.textContent = score;
+    }
+})
+
+btnHold.addEventListener('click', function() {
+    score0El.textContent = score;
+    if (score >= 100) {
+        
+    }
 })
 
 
